@@ -1,0 +1,28 @@
+From: The Fragata project <fragata-host@users.noreply.github.com>
+Subject: [PATCH] updater: use the Fragata Host update channel
+
+The updater only queried the repositories of XCP-ng: on a Fragata Host it found no update. Query the
+`fragata` repository too, and read the proxies from fragata.repo.
+
+---
+--- a/SOURCES/etc/xapi.d/plugins/updater.py	2026-11-02 15:45:45.598060600 -0300
++++ b/SOURCES/etc/xapi.d/plugins/updater.py	2026-11-02 15:45:45.830830600 -0300
+@@ -12,7 +12,8 @@
+ from xcpngutils.filelocker import FileLocker
+ 
+ 
+-DEFAULT_REPOS = ('xcp-ng-base', 'xcp-ng-updates', 'xcp-ng-linstor')
++# Fragata Host: its channel first; the XCP-ng names are kept for the hosts still configured with them
++DEFAULT_REPOS = ('fragata', 'xcp-ng-base', 'xcp-ng-updates', 'xcp-ng-linstor')
+ 
+ 
+ class OperationException(Exception):
+@@ -232,7 +233,7 @@
+     pass
+ 
+ 
+-CONFIGURATION_FILE = '/etc/yum.repos.d/xcp-ng.repo'
++CONFIGURATION_FILE = '/etc/yum.repos.d/fragata.repo'
+ 
+ 
+ # returns a JSON dict {repo_id: proxy}

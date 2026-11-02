@@ -1,9 +1,11 @@
 Summary: XAPI additional plugins for XCP-ng
 Name: xcp-ng-xapi-plugins
 Version: 1.17.0
-Release: 1%{?dist}
+Release: 1.1%{?dist}
 URL: https://github.com/xcp-ng/xcp-ng-xapi-plugins
 Source0: https://github.com/xcp-ng/xcp-ng-xapi-plugins/archive/v%{version}/%{name}-%{version}.tar.gz
+# Fragata Host: the updater queries the Fragata Host update channel
+Patch0: 0001-Fragata-Host-update-channel.patch
 License: AGPL-3.0-only
 
 BuildArch: noarch
@@ -32,6 +34,9 @@ install SOURCES/etc/xapi.d/plugins/xcpngutils/*.py %{buildroot}/etc/xapi.d/plugi
 %dir /var/lib/xcp-ng-xapi-plugins
 
 %changelog
+* Mon Nov 02 2026 The Fragata project - 1.17.0-1.1
+- Fragata Host: the updater queries the fragata repository and reads fragata.repo
+
 * Thu Jul 16 2026 Sebastien Rodot <sebastien.rodot@vates.tech> - 1.17.0-1
 - sdncontroller.py: fixes for hosts using VLANs (XCPNG-3551)
 
